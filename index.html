@@ -263,11 +263,6 @@
           <button type="button" onClick="{{ nextQuote }}" style="width: 46px; height: 46px; border-radius: 999px; border: 0; background: #16171a; color: #fff; font-size: 17px; cursor: pointer; transition: background .2s, transform .2s;" style-hover="background: #35373b; transform: translateY(-1px);">→</button>
         </div>
         <div style="margin-top: 18px; font-size: 13px; font-weight: 500; color: #85878b;">{{ quote.index }}</div>
-        <sc-if value="{{ showQuotePhoto }}" hint-placeholder-val="{{ true }}">
-          <div style="margin-top: 28px; border-radius: 18px; overflow: hidden; background: #dedcd8; aspect-ratio: 4 / 5;">
-            <img src="{{ quotePhoto }}" alt="Interior of a represented residence" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; animation: sol-img .8s both;">
-          </div>
-        </sc-if>
         <sc-if value="{{ showMarquee }}" hint-placeholder-val="{{ false }}">
           
         </sc-if>
