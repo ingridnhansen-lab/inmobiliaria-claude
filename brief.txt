@@ -1,0 +1,228 @@
+PROYECTO INMOBILIARIO PREMIUM (EE.UU.)Caso de Estudio · Documento de Research y Planeamiento
+Fase 1: Sitio Público (Comprador)
+
+1. OBJETIVO DEL PROYECTO (Fase 1)
+
+Crear un caso de estudio para portfolio profesional que demuestre la capacidad de diseñar y desarrollar una plataforma inmobiliaria escalable, orientada al mercado estadounidense de clase media-alta, con foco en compra y venta de propiedades.
+
+Meta de esta fase:
+- Sistema de diseño en Cloud Design
+- Maqueta completa del sitio público (solo experiencia del comprador)
+- Prototipo funcional deployado en Vercel
+
+Filosofia clave: Escalabilidad desde el dia 1. La plataforma debe estar preparada para crecer de 1 agente a 50 sin necesidad de redisenos arquitectonicos.
+
+Alcance de esta fase:
+- Home
+- Listado de propiedades con filtros
+- Detalle de propiedad
+- Formulario de contacto (envio de lead al agente)
+- Sobre nosotros
+- Blog / Insights
+- Contacto
+
+Fuera de alcance en esta fase (vision futura):
+- Dashboard del agente (carga de propiedades, leads)
+- Dashboard del administrador (gestion de agentes, propiedades globales)
+- Sistema de login y roles
+
+2. ALCANCE Y ENFOQUE DE NEGOCIO
+
+Ubicacion: Estados Unidos (NYC, Miami, LA, SF)
+Segmento: Clase media-alta y alto nivel adquisitivo
+Transacciones: Compra y venta de propiedades (alquiler NO es el foco principal)
+Modelo de negocio: Comisiones por venta (aproximadamente 5-6% del valor de la propiedad)
+Estructura: Agentes trabajan bajo la misma marca/agencia. Cada agente gestiona sus propias propiedades y leads
+Publico objetivo (esta fase): Compradores y vendedores premium
+
+3. USER PERSONAS (Foco: Comprador)
+
+Persona 1: Comprador / Vendedor Premium (PRINCIPAL)
+
+Nombre: Jonathan Miller
+Edad: 38 años
+Ocupacion: Ejecutivo / Tech Entrepreneur
+Ingresos: $250k+ anuales
+Ubicacion: Manhattan / Miami / Los Angeles
+Nivel tecnologico: Alto. Usa iPad, iPhone, laptop
+Expectativa digital: Experiencia premium, rapida, visualmente impactante
+Necesidades: Encontrar propiedades exclusivas (off-market), fotos 360, informacion clara (precio, impuestos, escuelas)
+Frustraciones: Paginas lentas, fotos de baja calidad, formularios largos
+Objetivo en el sitio: Comprar o vender su propiedad con la menor friccion posible
+
+Persona 2: Agente Inmobiliario (VISION FUTURA)
+
+Nombre: Sarah Chen
+Edad: 32 años
+Ocupacion: Agente inmobiliario licenciado
+Ubicacion: Miami, FL
+Ingresos: ~$120k/año (comisiones)
+Nivel tecnologico: Medio-alto (usa CRM, MLS, apps)
+Necesidades: Que sus propiedades se vean profesionales. Recibir leads en tiempo real. Gestionar propiedades facilmente
+Frustraciones: Leads que se pierden. Sistemas complicados. No poder destacar propiedades premium
+Objetivo en el sitio: Captar leads calificados y convertirlos en clientes
+
+Persona 3: Administrador (VISION FUTURA)
+
+Nombre: Robert Davis
+Edad: 45 años
+Ocupacion: Dueño / Director de la agencia
+Nivel tecnologico: Medio
+Necesidades: Visibilidad de todo el negocio. Gestionar agentes. Supervisar propiedades y leads globales
+Objetivo en el sitio: Escalar el negocio sin que la gestion se vuelva un caos
+
+4. ARQUITECTURA DE LA INFORMACION (IA) – SITIO PUBLICO
+
+Home
+- Hero con busqueda avanzada
+- Propiedades destacadas
+- Testimonios / Confianza
+- Call to action (vender / comprar)
+- Footer (contacto, redes, legal)
+
+Propiedades
+- Listado con filtros (ubicacion, precio, tipo, habitaciones)
+- Vista en mapa
+- Vista en lista
+- [Tarjeta de propiedad] → Detalle
+
+Detalle de Propiedad
+- Galeria de imagenes / video 360
+- Descripcion y caracteristicas
+- Mapa de ubicacion
+- Informacion del agente asignado
+- Formulario de contacto (dispara notificacion al agente)
+
+Vender (Sell)
+- Proceso explicado paso a paso
+- Formulario de valoracion instantanea
+- Beneficios de trabajar con la agencia
+
+Sobre Nosotros
+- Historia / Mision
+- Equipo de agentes (fotos, biografias, especialidades)
+
+Blog / Insights
+- Articulos de mercado, tendencias, consejos
+
+Contacto
+- Formulario general
+- Mapa / direccion
+- Horarios
+
+5. SISTEMA DE ROLES Y PERMISOS (VISION FUTURA)
+
+Visitante (sin login): Ver propiedades, busqueda, detalle, contacto
+Agente (logueado): CRUD de sus propias propiedades. Ver sus leads. Editar perfil
+Administrador (logueado): CRUD de todos los agentes. CRUD de todas las propiedades. Ver todos los leads. Estadisticas globales
+
+Nota: En esta fase, todos los usuarios son visitantes. Los roles de agente y administrador son vision futura.
+
+6. FLUJO DE NOTIFICACIONES (Fase 1)
+
+Cuando un lead completa el formulario en una propiedad:
+1. Email automatico al agente asignado (con datos del lead)
+2. Registro en el panel del agente (bandeja de leads con estado: nuevo / contactado / cerrado) - Vision futura
+
+En esta fase: El email se envia al agente. La bandeja de leads se desarrollara en fases posteriores.
+
+7. GUIA ESTETICA DEL SITIO PUBLICO
+
+Estilo general
+- Tono: Minimalista, super claro, ordenado, elegante
+- Alto contraste: El contenido debe ser facilmente legible
+- Fondo claro: El fondo debe ser mayoritariamente claro para que las imagenes sean las protagonistas
+- Inspiracion: Sitios de arquitectura y diseno de interiores de alta gama
+
+Microanimaciones e interacciones
+El sitio debe sentirse vivo y placentero de navegar. Se deben incluir microinteracciones en:
+- Hover sobre tarjetas de propiedad: Efecto sutil de elevacion o cambio de escala
+- Hover sobre botones: Cambio de color o sombra
+- Carga de imagenes: Efecto de fade-in o blur-up
+- Transiciones entre paginas: Suaves, sin saltos bruscos
+- Scroll: Efectos parallax o de revelado suave de elementos
+- Menu hamburguesa (mobile): Animacion de apertura/cierre fluida
+- Galeria de imagenes: Transiciones suaves entre diapositivas
+
+Fotografia
+- Alta calidad: Imagenes nitidas, bien iluminadas, profesionales
+- Protagonistas: La imagen debe ser el centro de atencion en tarjetas y detalles
+- Formato: WebP (optimizado), con lazy loading
+
+Jerarquia visual
+1. Imagen (mayor peso visual)
+2. Titulo / Precio (segundo nivel)
+3. Descripcion corta / caracteristicas (tercer nivel)
+4. Botones de accion (cuarto nivel, pero con contraste)
+
+8. REQUERIMIENTOS TECNICOS
+
+Mobile First
+- Diseno orientado a dispositivos moviles como prioridad
+- Navegacion con menu hamburguesa en mobile
+- Filtros desplegables o modales en mobile
+- Tarjetas de propiedad en una columna (scroll vertical)
+- Botones CTA con tamaño minimo de 44px (faciles de tocar)
+- Galeria de imagenes con swipe horizontal en mobile
+
+SEO (Search Engine Optimization)
+- URLs amigables: /propiedades/casa-miami-123
+- Meta titulos y descripciones unicos por propiedad
+- Imagenes optimizadas: WebP, compresion, lazy loading, ALT texts descriptivos
+- Datos estructurados (Schema): Usar Product o Place para propiedades
+- Blog / contenido con palabras clave localizadas
+- Enlaces internos entre propiedades similares, barrios, agentes
+
+Velocidad de carga
+Objetivo:
+- Desktop: menos de 2 segundos
+- Mobile (3G): menos de 3 segundos
+
+Acciones:
+- Imagenes: WebP, lazy loading, CDN, tamaños responsive (srcset)
+- Fuentes: Cargar solo las necesarias (2 familias maximo)
+- JavaScript: Minimizar, diferir scripts no criticos
+- CSS: Inline critico, resto diferido
+- Hosting: Vercel (CDN global)
+- Cache: Configurar headers de cache
+
+9. TECNOLOGIAS Y HERRAMIENTAS
+
+Diseno UI/UX: Cloud Design
+Sistema de diseno: Cloud Design (components, variants, styles)
+Prototipado interactivo: Cloud Design (prototype)
+Desarrollo front-end: Codigo (HTML/CSS/JS o framework)
+Deploy (prototipo funcional): Vercel
+Gestion de proyecto: Notion / Trello (opcional)
+
+10. CRONOGRAMA ESTIMADO (Fase 1)
+
+Research y definicion (documento actual): Completado
+Maquetacion en Cloud Design: 4-5 dias
+Prototipado interactivo en Cloud Design: 1-2 dias
+Desarrollo front-end: 5-7 dias
+Testing y ajustes: 1-2 dias
+Deploy en Vercel: 1 dia
+Total: Aproximadamente 2-3 semanas
+
+11. PROXIMOS PASOS
+
+1. Maquetar en Cloud Design el sitio publico (Home, Propiedades, Detalle, Vender, Sobre Nosotros, Blog, Contacto)
+2. Aplicar la guia estetica (minimalista, fondo claro, alto contraste, microanimaciones)
+3. Prototipar interacciones en Cloud Design
+4. Desarrollar y deployar en Vercel
+5. (Futuro) Agregar panel de agente y administrador
+
+12. NOTAS ADICIONALES
+
+El alquiler no es el foco principal, pero puede ser una funcionalidad secundaria en el futuro (escalable).
+El sitio debe ser 100% responsive (mobile-first).
+La velocidad de carga es critica para el posicionamiento y la experiencia de usuario.
+El blog / insights es clave para posicionamiento SEO y demostrar autoridad en el mercado.
+El visitante NO necesita login para ver propiedades o contactar al agente.
+Las secciones de administrador y agente estan documentadas como vision futura, pero no se desarrollan en esta fase.
+
+---
+
+Fin del documento.
+

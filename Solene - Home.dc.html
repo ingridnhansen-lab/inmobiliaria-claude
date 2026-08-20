@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&amp;family=Figtree:wght@300..700&amp;display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #f4f3f1; }
+  body { font-family: "Figtree", system-ui, sans-serif; color: #16171a; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #16171a; text-decoration: none; }
+  a:hover { color: #4a4c50; }
+  img { display: block; }
+  @keyframes sol-img { from { opacity: 0; filter: blur(12px); transform: scale(1.03); } to { opacity: 1; filter: blur(0); transform: scale(1); } }
+  @keyframes sol-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes sol-pop { from { opacity: 0; transform: translateY(14px) scale(.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  @keyframes sol-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes sol-marquee { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+</style>
+</helmet>
+
+<div style="width: 100%; background: #f4f3f1; overflow-x: hidden;">
+
+  <!-- NAV -->
+  <header style="position: sticky; top: 0; z-index: 40; background: rgba(244,243,241,.88); backdrop-filter: blur(14px);">
+    <div style="max-width: 1320px; margin: 0 auto; padding: 20px 40px; display: flex; align-items: center; gap: 40px;">
+      <a href="#top" style="display: flex; align-items: center; gap: 12px;">
+        <span style="display: block; width: 30px; height: 30px; border: 1.5px solid #16171a; border-radius: 4px; position: relative;">
+          <span style="position: absolute; left: 6px; right: 6px; bottom: 6px; height: 12px; border-top: 1.5px solid #16171a; border-left: 1.5px solid #16171a;"></span>
+        </span>
+        <span style="display: block; line-height: 1.15;">
+          <span style="display: block; font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.01em;">Solene</span>
+          <span style="display: block; font-size: 10px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: #85878b;">Premium residential</span>
+        </span>
+      </a>
+      <nav style="margin: 0 auto; display: flex; align-items: center; gap: 38px; font-size: 15px; font-weight: 500;">
+        <a href="#properties" onClick="{{ navClick }}" style="color: #4a4c50; transition: color .2s;" style-hover="color: #16171a;">Properties</a>
+        <a href="#neighborhoods" onClick="{{ navClick }}" style="color: #4a4c50; transition: color .2s;" style-hover="color: #16171a;">Neighborhoods</a>
+        <a href="#sell" onClick="{{ navClick }}" style="color: #4a4c50; transition: color .2s;" style-hover="color: #16171a;">Sell</a>
+        <a href="#agents" onClick="{{ navClick }}" style="color: #4a4c50; transition: color .2s;" style-hover="color: #16171a;">Agents</a>
+        <a href="#insights" onClick="{{ navClick }}" style="color: #4a4c50; transition: color .2s;" style-hover="color: #16171a;">Insights</a>
+      </nav>
+      <button type="button" onClick="{{ openContact }}" style="min-height: 44px; padding: 0 26px; border: 0; border-radius: 999px; background: #16171a; color: #fff; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: background .22s, transform .22s;" style-hover="background: #35373b; transform: translateY(-1px);" style-active="transform: translateY(0); background: #0c0d0f;">Book a viewing</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="top" style="max-width: 1320px; margin: 0 auto; padding: 8px 40px 0;">
+    <div style="position: relative; border-radius: 26px; overflow: hidden; height: 560px; background: #d7d6d3;">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=2200&amp;q=80&amp;auto=format&amp;fit=crop" alt="Contemporary house at dusk with lit interiors" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: sol-img 1s cubic-bezier(.2,.7,.2,1) both;">
+      <div style="position: absolute; inset: 0; background: linear-gradient(100deg, rgba(18,19,21,.72) 0%, rgba(18,19,21,.42) 46%, rgba(18,19,21,.06) 78%);"></div>
+      <div style="position: absolute; left: 56px; top: 50%; transform: translateY(-50%); max-width: 560px; animation: sol-rise .8s .15s cubic-bezier(.2,.7,.2,1) both;">
+        <div style="font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.72);">New York · Miami · Los Angeles · San Francisco</div>
+        <h1 style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 62px; line-height: 1.05; letter-spacing: -0.028em; margin: 20px 0 0; color: #fff; text-wrap: pretty;">Architectural homes, quietly brokered</h1>
+        <p style="margin: 20px 0 0; max-width: 430px; font-size: 17px; line-height: 1.6; color: rgba(255,255,255,.82); text-wrap: pretty;">A curated collection of 148 residences across four US cities — represented by agents who know every room in them.</p>
+        <div style="margin-top: 34px; display: flex; gap: 12px;">
+          <button type="button" onClick="{{ scrollToResults }}" style="min-height: 48px; padding: 0 30px; border: 0; border-radius: 999px; background: #fff; color: #16171a; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: background .22s, transform .22s;" style-hover="background: #e9e8e5; transform: translateY(-1px);">Browse the collection</button>
+          <button type="button" onClick="{{ scrollToSell }}" style="min-height: 48px; padding: 0 30px; border: 1px solid rgba(255,255,255,.4); border-radius: 999px; background: transparent; color: #fff; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: background .22s, border-color .22s;" style-hover="background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.7);">Value my home</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEARCH (below the image, not over the title) -->
+    <div style="margin-top: 16px; background: #fff; border: 1px solid #e4e3e0; border-radius: 22px; padding: 22px 26px;">
+      <div style="display: grid; grid-template-columns: 1.15fr 1fr 1.1fr 1.2fr auto; gap: 26px; align-items: end;">
+        <label style="display: block;">
+          <span style="display: block; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #85878b; margin-bottom: 9px;">City</span>
+          <select value="{{ city }}" onChange="{{ setCity }}" style="width: 100%; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #dedcd8; background: #f8f7f5; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 500; color: #16171a; cursor: pointer; appearance: none; transition: border-color .2s;" style-hover="border-color: #b6b4af;" style-focus="outline: 2px solid #16171a; outline-offset: 2px;">
+            <option value="All">All cities</option>
+            <option value="New York">New York</option>
+            <option value="Miami">Miami</option>
+            <option value="Los Angeles">Los Angeles</option>
+            <option value="San Francisco">San Francisco</option>
+          </select>
+        </label>
+        <label style="display: block;">
+          <span style="display: block; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #85878b; margin-bottom: 9px;">Type</span>
+          <select value="{{ type }}" onChange="{{ setType }}" style="width: 100%; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #dedcd8; background: #f8f7f5; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 500; color: #16171a; cursor: pointer; appearance: none; transition: border-color .2s;" style-hover="border-color: #b6b4af;" style-focus="outline: 2px solid #16171a; outline-offset: 2px;">
+            <option value="All">Any type</option>
+            <option value="House">House</option>
+            <option value="Penthouse">Penthouse</option>
+            <option value="Loft">Loft</option>
+            <option value="Estate">Estate</option>
+          </select>
+        </label>
+        <div>
+          <span style="display: block; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #85878b; margin-bottom: 9px;">Bedrooms</span>
+          <div style="display: flex; gap: 6px;">
+            <sc-for list="{{ bedOptions }}" as="opt" hint-placeholder-count="4">
+              <button type="button" onClick="{{ opt.pick }}" style="flex: 1; min-height: 44px; border-radius: 999px; border: 1px solid {{ opt.border }}; background: {{ opt.bg }}; color: {{ opt.fg }}; font-family: 'Figtree', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: background .2s, border-color .2s, color .2s;" style-hover="border-color: #85878b;">{{ opt.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div>
+          <span style="display: block; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #85878b; margin-bottom: 9px;">Budget up to {{ priceLabel }}</span>
+          <input type="range" min="2" max="30" step="1" value="{{ maxPrice }}" onChange="{{ setPrice }}" onInput="{{ setPrice }}" style="width: 100%; height: 44px; accent-color: #16171a; cursor: pointer;">
+        </div>
+        <button type="button" onClick="{{ scrollToResults }}" style="min-height: 44px; padding: 0 32px; border: 0; border-radius: 999px; background: #16171a; color: #fff; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background .22s, transform .22s;" style-hover="background: #35373b; transform: translateY(-1px);" style-active="transform: translateY(0);">{{ resultsLabel }}</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT + STATS -->
+  <section style="max-width: 1320px; margin: 0 auto; padding: 104px 40px 0;">
+    <div style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 120px; align-items: start;">
+      <div data-reveal="1">
+        <h2 style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 38px; line-height: 1.1; letter-spacing: -0.025em; margin: 0;">About Solene</h2>
+        <p style="margin: 22px 0 0; font-size: 16px; line-height: 1.7; color: #55575b; text-wrap: pretty;">Founded in 2016, Solene represents buyers and sellers of architecturally significant homes in four US markets. We keep the roster small on purpose: twenty-four agents, each covering a handful of neighborhoods they actually live in. Search, negotiation, legal review and closing sit with the same person from first viewing to keys.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 44px 64px;">
+        <div data-reveal="1"><div data-count="4.2" data-prefix="$" data-suffix="B" data-dec="1" style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 44px; line-height: 1; letter-spacing: -0.03em;">$4.2B</div><div style="margin-top: 10px; font-size: 14px; color: #6f7175;">Closed volume since 2016</div></div>
+        <div data-reveal="1"><div data-count="148" data-dec="0" style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 44px; line-height: 1; letter-spacing: -0.03em;">148</div><div style="margin-top: 10px; font-size: 14px; color: #6f7175;">Residences currently represented</div></div>
+        <div data-reveal="1"><div data-count="21" data-suffix=" days" data-dec="0" style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 44px; line-height: 1; letter-spacing: -0.03em;">21 days</div><div style="margin-top: 10px; font-size: 14px; color: #6f7175;">Median time to first offer</div></div>
+        <div data-reveal="1"><div data-count="38" data-suffix="%" data-dec="0" style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 44px; line-height: 1; letter-spacing: -0.03em;">38%</div><div style="margin-top: 10px; font-size: 14px; color: #6f7175;">Sold off-market, never listed</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="properties" style="max-width: 1320px; margin: 0 auto; padding: 104px 40px 0;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; padding-bottom: 26px; border-bottom: 1px solid #e4e3e0;">
+      <div>
+        <div style="font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #85878b;">The collection</div>
+        <h2 style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 38px; line-height: 1.1; letter-spacing: -0.025em; margin: 14px 0 0;">Matching your search</h2>
+      </div>
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <span style="font-size: 14px; color: #6f7175;">{{ resultsSummary }}</span>
+        <button type="button" onClick="{{ resetFilters }}" style="min-height: 44px; padding: 0 22px; border: 1px solid #dedcd8; border-radius: 999px; background: transparent; font-family: 'Figtree', sans-serif; font-size: 14px; font-weight: 600; color: #16171a; cursor: pointer; transition: background .2s, border-color .2s;" style-hover="background: #ebeae7; border-color: #b6b4af;">Reset filters</button>
+      </div>
+    </div>
+
+    <div style="margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 32px;">
+      <sc-for list="{{ visible }}" as="p" hint-placeholder-count="6">
+        <article data-reveal="1" onClick="{{ p.open }}" style="cursor: pointer;">
+          <div style="position: relative; border-radius: 18px; overflow: hidden; background: #dedcd8; aspect-ratio: 4 / 3;">
+            <img src="{{ p.img }}" alt="{{ p.title }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); animation: sol-img .8s both;" style-hover="transform: scale(1.045);">
+            <div style="position: absolute; top: 14px; left: 14px; padding: 7px 13px; border-radius: 999px; background: rgba(255,255,255,.94); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #16171a;">{{ p.badge }}</div>
+            <div style="position: absolute; bottom: 14px; right: 14px; padding: 8px 15px; border-radius: 999px; background: rgba(18,19,21,.72); backdrop-filter: blur(4px); font-size: 13px; font-weight: 600; color: #fff;">{{ p.price }}</div>
+          </div>
+          <div style="padding-top: 18px;">
+            <div style="font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 19px; letter-spacing: -0.01em;">{{ p.title }}</div>
+            <div style="margin-top: 6px; font-size: 14px; color: #6f7175;">{{ p.location }}</div>
+            <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid #e4e3e0; display: flex; gap: 18px; font-size: 13px; font-weight: 500; color: #6f7175;">
+              <span>{{ p.beds }} bd</span><span>{{ p.baths }} ba</span><span>{{ p.sqft }} sq ft</span>
+            </div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top: 36px; padding: 72px; border: 1px solid #e4e3e0; border-radius: 22px; background: #fff; text-align: center;">
+        <div style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: -0.02em;">Nothing at this brief — yet</div>
+        <p style="margin: 12px auto 0; max-width: 440px; font-size: 16px; line-height: 1.6; color: #6f7175;">Roughly a third of what we sell never reaches the site. Tell us what you are looking for and we will open the off-market book.</p>
+        <button type="button" onClick="{{ openContact }}" style="margin-top: 26px; min-height: 46px; padding: 0 28px; border: 0; border-radius: 999px; background: #16171a; color: #fff; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: background .22s;" style-hover="background: #35373b;">Send us the brief</button>
+      </div>
+    </sc-if>
+  </section>
+
+  <!-- NEIGHBORHOODS -->
+  <section id="neighborhoods" style="max-width: 1320px; margin: 0 auto; padding: 116px 40px 0;">
+    <div style="display: grid; grid-template-columns: 300px 1fr; gap: 64px; align-items: start;">
+      <div>
+        <h2 style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 38px; line-height: 1.1; letter-spacing: -0.025em; margin: 0;">Neighborhood guide</h2>
+        <p style="margin: 18px 0 0; font-size: 15px; line-height: 1.65; color: #6f7175;">Median prices, school districts, tax profile, and what the block actually feels like on a Tuesday morning.</p>
+        <a href="#neighborhoods" style="display: inline-block; margin-top: 20px; font-size: 15px; font-weight: 600; border-bottom: 1px solid #b6b4af; padding-bottom: 3px;">All 18 guides</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+        <sc-for list="{{ hoods }}" as="h" hint-placeholder-count="4">
+          <a href="#neighborhoods" data-reveal="1" style="display: block;">
+            <div style="position: relative; border-radius: 18px; overflow: hidden; background: #dedcd8; aspect-ratio: 3 / 4;">
+              <img src="{{ h.img }}" alt="{{ h.name }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); animation: sol-img .8s both;" style-hover="transform: scale(1.05);">
+              <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,19,21,.66), rgba(18,19,21,0) 58%);"></div>
+              <div style="position: absolute; left: 18px; right: 18px; bottom: 18px;">
+                <div style="font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7);">{{ h.city }}</div>
+                <div style="margin-top: 7px; font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 21px; color: #fff; letter-spacing: -0.01em;">{{ h.name }}</div>
+                <div style="margin-top: 5px; font-size: 13px; color: rgba(255,255,255,.78);">{{ h.stat }}</div>
+                <div style="margin-top: 14px; display: inline-flex; align-items: center; padding: 8px 15px; border-radius: 999px; background: rgba(255,255,255,.94); font-size: 13px; font-weight: 600; color: #16171a;">{{ h.listings }} listings</div>
+              </div>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELL -->
+  <section id="sell" style="max-width: 1320px; margin: 0 auto; padding: 116px 40px 0;">
+    <div data-reveal="1" style="max-width: 620px;">
+      <div style="font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #85878b;">Selling</div>
+      <h2 style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 38px; line-height: 1.1; letter-spacing: -0.025em; margin: 14px 0 0;">Know what it is worth before you decide</h2>
+      <p style="margin: 18px 0 0; font-size: 16px; line-height: 1.7; color: #55575b; text-wrap: pretty;">Three minutes for the estimate, sixty for the walkthrough. Nothing is committed until you have seen both numbers.</p>
+    </div>
+    <div style="margin-top: 40px; display: grid; grid-template-columns: 1fr 1.05fr; column-gap: 64px; row-gap: 24px; align-items: start;">
+      <div data-reveal="1" style="grid-column: 1; grid-row: 1 / span 2; align-self: center;">
+        <div style="background: #fff; border: 1px solid #e4e3e0; border-radius: 22px; padding: 30px;">
+          <div style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.02em;">Instant valuation</div>
+          <p style="margin: 8px 0 24px; font-size: 15px; color: #6f7175;">Three fields. The estimate arrives by email within the hour.</p>
+          <div style="display: grid; gap: 16px;">
+            <label style="display: block;">
+              <span style="display: block; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #85878b; margin-bottom: 9px;">Property address</span>
+              <input type="text" placeholder="1240 Ocean Drive, Miami Beach" value="{{ f.address }}" onInput="{{ onAddress }}" style="width: 100%; min-height: 48px; padding: 0 20px; border-radius: 999px; border: 1px solid {{ f.addressBorder }}; background: #f8f7f5; font-family: 'Figtree', sans-serif; font-size: 15px; color: #16171a; transition: border-color .2s;" style-focus="outline: 2px solid #16171a; outline-offset: 2px;">
+              <span style="display: block; margin-top: 6px; font-size: 13px; font-weight: 500; color: #b4342a; min-height: 17px;">{{ f.addressError }}</span>
+            </label>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <label style="display: block;">
+                <span style="display: block; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #85878b; margin-bottom: 9px;">Email</span>
+                <input type="email" placeholder="you@domain.com" value="{{ f.email }}" onInput="{{ onEmail }}" style="width: 100%; min-height: 48px; padding: 0 20px; border-radius: 999px; border: 1px solid {{ f.emailBorder }}; background: #f8f7f5; font-family: 'Figtree', sans-serif; font-size: 15px; color: #16171a; transition: border-color .2s;" style-focus="outline: 2px solid #16171a; outline-offset: 2px;">
+                <span style="display: block; margin-top: 6px; font-size: 13px; font-weight: 500; color: #b4342a; min-height: 17px;">{{ f.emailError }}</span>
+              </label>
+              <label style="display: block;">
+                <span style="display: block; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #85878b; margin-bottom: 9px;">Timeline</span>
+                <select value="{{ f.timeline }}" onChange="{{ onTimeline }}" style="width: 100%; min-height: 48px; padding: 0 18px; border-radius: 999px; border: 1px solid #dedcd8; background: #f8f7f5; font-family: 'Figtree', sans-serif; font-size: 15px; color: #16171a; cursor: pointer; appearance: none;" style-focus="outline: 2px solid #16171a; outline-offset: 2px;">
+                  <option value="Exploring">Just exploring</option>
+                  <option value="3 months">Within 3 months</option>
+                  <option value="6 months">Within 6 months</option>
+                  <option value="This year">This year</option>
+                </select>
+                <span style="display: block; margin-top: 6px; min-height: 17px;"></span>
+              </label>
+            </div>
+            <button type="button" onClick="{{ submitValuation }}" style="min-height: 52px; border: 0; border-radius: 999px; background: #16171a; color: #fff; font-family: 'Figtree', sans-serif; font-size: 16px; font-weight: 600; cursor: pointer; transition: background .22s, transform .22s;" style-hover="background: #35373b; transform: translateY(-1px);" style-active="transform: translateY(0);">{{ f.cta }}</button>
+            <sc-if value="{{ f.sent }}" hint-placeholder-val="{{ false }}">
+              <div style="padding: 15px 20px; border-radius: 14px; background: #eceae7; font-size: 14px; font-weight: 500; color: #16171a; animation: sol-rise .35s both;">Sent. Your estimate and the covering agent's name are on their way to {{ f.email }}.</div>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal="1" style="grid-column: 2; grid-row: 1; align-self: stretch; border-radius: 20px; overflow: hidden; background: #dedcd8; min-height: 300px;">
+        <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1400&amp;q=80&amp;auto=format&amp;fit=crop" alt="Dark timber contemporary house" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; animation: sol-img .9s both;">
+      </div>
+      <div data-reveal="1" style="grid-column: 2; grid-row: 2;">
+        <div style="display: grid;">
+          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+            <div style="display: grid; grid-template-columns: 44px 1fr; gap: 22px; padding: 22px 0; border-bottom: 1px solid #e4e3e0;">
+              <div style="width: 44px; height: 44px; border-radius: 999px; background: #16171a; color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 14px;">{{ s.n }}</div>
+              <div>
+                <div style="font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 18px; letter-spacing: -0.01em;">{{ s.title }}</div>
+                <div style="margin-top: 6px; font-size: 15px; line-height: 1.6; color: #6f7175;">{{ s.body }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section style="max-width: 1320px; margin: 0 auto; padding: 116px 40px 0;">
+    <div style="display: grid; grid-template-columns: 300px 1fr; gap: 64px; align-items: start;">
+      <div>
+        <h2 style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 38px; line-height: 1.1; letter-spacing: -0.025em; margin: 0;">Reviews</h2>
+        <div style="margin-top: 24px; display: flex; gap: 10px;">
+          <button type="button" onClick="{{ prevQuote }}" style="width: 46px; height: 46px; border-radius: 999px; border: 1px solid #dedcd8; background: transparent; color: #16171a; font-size: 17px; cursor: pointer; transition: background .2s, border-color .2s;" style-hover="background: #ebeae7; border-color: #b6b4af;">←</button>
+          <button type="button" onClick="{{ nextQuote }}" style="width: 46px; height: 46px; border-radius: 999px; border: 0; background: #16171a; color: #fff; font-size: 17px; cursor: pointer; transition: background .2s, transform .2s;" style-hover="background: #35373b; transform: translateY(-1px);">→</button>
+        </div>
+        <div style="margin-top: 18px; font-size: 13px; font-weight: 500; color: #85878b;">{{ quote.index }}</div>
+        <sc-if value="{{ showQuotePhoto }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top: 28px; border-radius: 18px; overflow: hidden; background: #dedcd8; aspect-ratio: 4 / 5;">
+            <img src="{{ quotePhoto }}" alt="Interior of a represented residence" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; animation: sol-img .8s both;">
+          </div>
+        </sc-if>
+        <sc-if value="{{ showMarquee }}" hint-placeholder-val="{{ false }}">
+          
+        </sc-if>
+      </div>
+      <div data-reveal="1" style="background: #fff; border: 1px solid #e4e3e0; border-radius: 22px; padding: 44px 48px;">
+        <blockquote style="margin: 0; font-family: 'Archivo', sans-serif; font-weight: 500; font-size: 27px; line-height: 1.4; letter-spacing: -0.015em; text-wrap: pretty;">{{ quote.text }}</blockquote>
+        <div style="margin-top: 32px; display: flex; align-items: center; gap: 15px;">
+          <img src="{{ quote.img }}" alt="{{ quote.name }}" loading="lazy" style="width: 50px; height: 50px; border-radius: 999px; object-fit: cover;">
+          <div>
+            <div style="font-size: 16px; font-weight: 600;">{{ quote.name }}</div>
+            <div style="margin-top: 3px; font-size: 14px; color: #6f7175;">{{ quote.meta }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AGENTS -->
+  <section id="agents" style="max-width: 1320px; margin: 0 auto; padding: 116px 40px 0;">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; padding-bottom: 26px; border-bottom: 1px solid #e4e3e0;">
+      <div style="max-width: 560px;">
+        <div style="font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #85878b;">The team</div>
+        <h2 style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 38px; line-height: 1.1; letter-spacing: -0.025em; margin: 14px 0 0;">Agents, not a call centre</h2>
+      </div>
+      <a href="#agents" style="font-size: 15px; font-weight: 600; border-bottom: 1px solid #b6b4af; padding-bottom: 3px;">All 24 agents</a>
+    </div>
+    <div style="margin-top: 36px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px;">
+      <sc-for list="{{ agents }}" as="a" hint-placeholder-count="4">
+        <div data-reveal="1">
+          <div style="border-radius: 18px; overflow: hidden; background: #dedcd8; aspect-ratio: 4 / 5;">
+            <img src="{{ a.img }}" alt="{{ a.name }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); animation: sol-img .8s both;" style-hover="transform: scale(1.04);">
+          </div>
+          <div style="padding-top: 16px;">
+            <div style="font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 18px; letter-spacing: -0.01em;">{{ a.name }}</div>
+            <div style="margin-top: 5px; font-size: 14px; color: #6f7175;">{{ a.role }}</div>
+            <div style="margin-top: 14px; display: flex; flex-wrap: wrap; gap: 7px;">
+              <span style="padding: 6px 12px; border-radius: 999px; background: #eceae7; font-size: 12px; font-weight: 600; color: #4a4c50;">{{ a.spec }}</span>
+              <span style="padding: 6px 12px; border-radius: 999px; background: #eceae7; font-size: 12px; font-weight: 600; color: #4a4c50;">{{ a.sales }}</span>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- INSIGHTS CTA -->
+  <section id="insights" style="max-width: 1320px; margin: 0 auto; padding: 116px 40px 0;">
+    <div data-reveal="1" style="position: relative; border-radius: 26px; overflow: hidden; min-height: 300px; background: #d7d6d3; display: flex; align-items: center;">
+      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=2000&amp;q=80&amp;auto=format&amp;fit=crop" alt="Glass towers seen from below" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+      <div style="position: absolute; inset: 0; background: linear-gradient(95deg, rgba(18,19,21,.82) 0%, rgba(18,19,21,.5) 60%, rgba(18,19,21,.2) 100%);"></div>
+      <div style="position: relative; padding: 56px; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; width: 100%;">
+        <div>
+          <h2 style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 34px; line-height: 1.12; letter-spacing: -0.025em; margin: 0; color: #fff;">The off-market book, monthly</h2>
+          <p style="margin: 14px 0 0; max-width: 520px; font-size: 16px; line-height: 1.6; color: rgba(255,255,255,.8);">Listings before they publish, plus one short read on where the four markets are heading.</p>
+        </div>
+        <button type="button" onClick="{{ openContact }}" style="min-height: 52px; padding: 0 34px; border: 0; border-radius: 999px; background: #fff; color: #16171a; font-family: 'Figtree', sans-serif; font-size: 16px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background .22s, transform .22s;" style-hover="background: #e9e8e5; transform: translateY(-1px);">Request access</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="margin-top: 116px; border-top: 1px solid #e4e3e0;">
+    <div style="max-width: 1320px; margin: 0 auto; padding: 64px 40px 36px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 56px;">
+      <div>
+        <div style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: -0.01em;">Solene</div>
+        <p style="margin: 12px 0 0; max-width: 280px; font-size: 14px; line-height: 1.65; color: #6f7175;">Residential brokerage in New York, Miami, Los Angeles and San Francisco.</p>
+      </div>
+      <div>
+        <div style="font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #85878b;">Buy</div>
+        <div style="margin-top: 16px; display: grid; gap: 10px; font-size: 14px;">
+          <a href="#properties">All properties</a><a href="#properties">Off-market</a><a href="#neighborhoods">Neighborhoods</a><a href="#properties">New this week</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #85878b;">Company</div>
+        <div style="margin-top: 16px; display: grid; gap: 10px; font-size: 14px;">
+          <a href="#agents">About us</a><a href="#agents">Agents</a><a href="#insights">Insights</a><a href="#sell">Sell with Solene</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #85878b;">Contact</div>
+        <div style="margin-top: 16px; display: grid; gap: 10px; font-size: 14px; color: #6f7175;">
+          <span>412 W 14th Street, New York</span><span>+1 (212) 555 0148</span><a href="#top">hello@solene.com</a>
+        </div>
+      </div>
+    </div>
+    <div style="max-width: 1320px; margin: 0 auto; padding: 0 40px 44px; display: flex; justify-content: space-between; font-size: 13px; color: #85878b;">
+      <span>© 2026 Solene Properties. Equal Housing Opportunity.</span>
+      <span style="display: flex; gap: 24px;"><a href="#top">Privacy</a><a href="#top">Terms</a><a href="#top">Accessibility</a></span>
+    </div>
+  </footer>
+
+  <!-- PROPERTY MODAL -->
+  <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeModal }}" style="position: fixed; inset: 0; z-index: 90; background: rgba(18,19,21,.62); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 40px; animation: sol-fade .2s both;">
+      <div onClick="{{ stop }}" style="width: 100%; max-width: 1060px; background: #f8f7f5; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.35); animation: sol-pop .3s cubic-bezier(.2,.7,.2,1) both;">
+        <div style="position: relative; height: 470px; background: #dedcd8;">
+          <img src="{{ active.slideImg }}" alt="{{ active.title }}" style="width: 100%; height: 100%; object-fit: cover; animation: sol-fade .35s both;">
+          <button type="button" onClick="{{ closeModal }}" style="position: absolute; top: 18px; right: 18px; width: 44px; height: 44px; border-radius: 999px; border: 0; background: rgba(255,255,255,.94); font-size: 17px; cursor: pointer; transition: background .2s;" style-hover="background: #fff;">✕</button>
+          <button type="button" onClick="{{ prevSlide }}" style="position: absolute; left: 18px; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 999px; border: 0; background: rgba(255,255,255,.9); font-size: 17px; cursor: pointer; transition: background .2s;" style-hover="background: #fff;">←</button>
+          <button type="button" onClick="{{ nextSlide }}" style="position: absolute; right: 18px; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 999px; border: 0; background: rgba(255,255,255,.9); font-size: 17px; cursor: pointer; transition: background .2s;" style-hover="background: #fff;">→</button>
+          <div style="position: absolute; left: 24px; bottom: 20px; padding: 8px 15px; border-radius: 999px; background: rgba(18,19,21,.7); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #fff;">{{ active.slideCaption }}</div>
+          <div style="position: absolute; right: 24px; bottom: 20px; padding: 8px 15px; border-radius: 999px; background: rgba(255,255,255,.94); font-size: 13px; font-weight: 600;">{{ active.slideCounter }}</div>
+        </div>
+        <div style="padding: 30px 36px 36px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 44px;">
+          <div>
+            <div style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 30px; letter-spacing: -0.025em;">{{ active.price }}</div>
+            <div style="margin-top: 8px; font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 19px;">{{ active.title }}</div>
+            <div style="margin-top: 4px; font-size: 15px; color: #6f7175;">{{ active.location }}</div>
+            <p style="margin: 18px 0 0; font-size: 16px; line-height: 1.65; color: #43454a; text-wrap: pretty;">{{ active.blurb }}</p>
+            <div style="margin-top: 22px; padding-top: 18px; border-top: 1px solid #e4e3e0; display: flex; gap: 26px; font-size: 14px; font-weight: 500; color: #6f7175;">
+              <span>{{ active.beds }} bedrooms</span><span>{{ active.baths }} baths</span><span>{{ active.sqft }} sq ft</span><span>{{ active.type }}</span>
+            </div>
+          </div>
+          <div style="border-left: 1px solid #e4e3e0; padding-left: 32px;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <img src="{{ active.agentImg }}" alt="{{ active.agent }}" style="width: 50px; height: 50px; border-radius: 999px; object-fit: cover;">
+              <div>
+                <div style="font-size: 16px; font-weight: 600;">{{ active.agent }}</div>
+                <div style="margin-top: 3px; font-size: 13px; color: #6f7175;">Listing agent</div>
+              </div>
+            </div>
+            <button type="button" onClick="{{ openContact }}" style="margin-top: 20px; width: 100%; min-height: 48px; border: 0; border-radius: 999px; background: #16171a; color: #fff; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: background .22s;" style-hover="background: #35373b;">Request a viewing</button>
+            <button type="button" onClick="{{ closeModal }}" style="margin-top: 10px; width: 100%; min-height: 48px; border: 1px solid #dedcd8; border-radius: 999px; background: transparent; font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 600; color: #16171a; cursor: pointer; transition: background .2s;" style-hover="background: #ebeae7;">Back to results</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- CONTACT MODAL -->
+  <sc-if value="{{ contactOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeContact }}" style="position: fixed; inset: 0; z-index: 95; background: rgba(18,19,21,.62); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 40px; animation: sol-fade .2s both;">
+      <div onClick="{{ stop }}" style="width: 100%; max-width: 520px; background: #f8f7f5; border-radius: 24px; padding: 34px; box-shadow: 0 30px 80px rgba(0,0,0,.35); animation: sol-pop .3s cubic-bezier(.2,.7,.2,1) both;">
+        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;">
+          <div>
+            <div style="font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: -0.02em;">Talk to an agent</div>
+            <p style="margin: 8px 0 0; font-size: 15px; color: #6f7175;">One reply, within the working day.</p>
+          </div>
+          <button type="button" onClick="{{ closeContact }}" style="width: 44px; height: 44px; flex: 0 0 44px; border-radius: 999px; border: 1px solid #dedcd8; background: transparent; font-size: 16px; cursor: pointer; transition: background .2s;" style-hover="background: #ebeae7;">✕</button>
+        </div>
+        <div style="margin-top: 24px; display: grid; gap: 14px;">
+          <label style="display: block;">
+            <span style="display: block; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #85878b; margin-bottom: 9px;">Name</span>
+            <input type="text" placeholder="Jonathan Miller" value="{{ c.name }}" onInput="{{ onCName }}" style="width: 100%; min-height: 48px; padding: 0 20px; border-radius: 999px; border: 1px solid {{ c.nameBorder }}; background: #fff; font-family: 'Figtree', sans-serif; font-size: 15px;" style-focus="outline: 2px solid #16171a; outline-offset: 2px;">
+            <span style="display: block; margin-top: 6px; font-size: 13px; font-weight: 500; color: #b4342a; min-height: 17px;">{{ c.nameError }}</span>
+          </label>
+          <label style="display: block;">
+            <span style="display: block; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #85878b; margin-bottom: 9px;">Email</span>
+            <input type="email" placeholder="you@domain.com" value="{{ c.email }}" onInput="{{ onCEmail }}" style="width: 100%; min-height: 48px; padding: 0 20px; border-radius: 999px; border: 1px solid {{ c.emailBorder }}; background: #fff; font-family: 'Figtree', sans-serif; font-size: 15px;" style-focus="outline: 2px solid #16171a; outline-offset: 2px;">
+            <span style="display: block; margin-top: 6px; font-size: 13px; font-weight: 500; color: #b4342a; min-height: 17px;">{{ c.emailError }}</span>
+          </label>
+          <label style="display: block;">
+            <span style="display: block; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #85878b; margin-bottom: 9px;">What are you looking for?</span>
+            <textarea rows="3" placeholder="Four bedrooms, Miami Beach, ready to move by spring." value="{{ c.note }}" onInput="{{ onCNote }}" style="width: 100%; padding: 14px 18px; border-radius: 16px; border: 1px solid #dedcd8; background: #fff; font-family: 'Figtree', sans-serif; font-size: 15px; resize: vertical;" style-focus="outline: 2px solid #16171a; outline-offset: 2px;"></textarea>
+          </label>
+          <button type="button" onClick="{{ submitContact }}" style="min-height: 52px; border: 0; border-radius: 999px; background: #16171a; color: #fff; font-family: 'Figtree', sans-serif; font-size: 16px; font-weight: 600; cursor: pointer; transition: background .22s, transform .22s;" style-hover="background: #35373b; transform: translateY(-1px);">{{ c.cta }}</button>
+          <sc-if value="{{ c.sent }}" hint-placeholder-val="{{ false }}">
+            <div style="padding: 15px 20px; border-radius: 14px; background: #eceae7; font-size: 14px; font-weight: 500; animation: sol-rise .35s both;">Thank you — an agent has your brief and will reply to {{ c.email }}.</div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440}, &quot;reviewsMedia&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;photo&quot;, &quot;marquee&quot;, &quot;none&quot;], &quot;default&quot;: &quot;photo&quot;, &quot;tsType&quot;: &quot;\&quot;photo\&quot; | \&quot;marquee\&quot; | \&quot;none\&quot;&quot;, &quot;section&quot;: &quot;Reviews block&quot;, &quot;label&quot;: &quot;Fill the empty column with&quot;}, &quot;motion&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Motion&quot;, &quot;label&quot;: &quot;Scroll reveal + count-up&quot;}, &quot;galleryAutoplay&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Motion&quot;, &quot;label&quot;: &quot;Auto-advance property gallery&quot;}}">
+const U = (id, w, h) => "https://images.unsplash.com/photo-" + id + "?w=" + w + "&h=" + h + "&q=80&auto=format&fit=crop";
+const P = (id) => U(id, 900, 1120) + "&crop=faces";
+
+const INT = {
+  living: "1600607687939-ce8a6c25118c",
+  living2: "1616486338812-3dadae4b4ace",
+  kitchen: "1600585152220-90363fe7e115",
+  kitchenDark: "1600607687920-4e2a09cf159d",
+  bedroom: "1615874959474-d609969a20ed",
+  bedroom2: "1512918728675-ed5a9ecdebfd",
+  loft: "1565182999561-18d7dc61c393",
+  stairs: "1502005229762-cf1b2da7c5d6",
+  glassWall: "1600573472550-8090b5e0745e",
+  open: "1604014237800-1c9102c219da"
+};
+
+const AGENT_IMG = {
+  "Sarah Chen": P("1607746882042-944635dfe10e"),
+  "Daniel Okoye": P("1507003211169-0a1dd7228f2d"),
+  "Marion Reyes": P("1544005313-94ddf0286df2"),
+  "Priya Raval": P("1531123897727-8f129e1688ce")
+};
+
+const PROPERTIES = [
+  { id: 1, price: 8950000, title: "Sunset Cliff House", location: "Malibu, Los Angeles", city: "Los Angeles", type: "House", beds: 5, baths: 6, sqft: "6,400", badge: "Off-market", agent: "Priya Raval",
+    hero: "1600585154340-be6161a56a0c", gallery: [INT.glassWall, INT.living, INT.kitchenDark, INT.bedroom],
+    blurb: "A single-storey glass volume set into the cliff, with a thirty-metre lap pool along the ocean edge. Completed 2021 by Studio Marne; every room opens to the water." },
+  { id: 2, price: 4250000, title: "Tribeca Loft 4B", location: "Tribeca, New York", city: "New York", type: "Loft", beds: 3, baths: 3, sqft: "3,100", badge: "New", agent: "Daniel Okoye",
+    hero: "1565182999561-18d7dc61c393", gallery: [INT.living2, INT.kitchen, INT.stairs, INT.bedroom2],
+    blurb: "A full-floor conversion in a cast-iron warehouse: eleven-foot ceilings, original columns, and a kitchen built around a four-metre block of Calacatta." },
+  { id: 3, price: 12400000, title: "Bay Ridge Estate", location: "Pacific Heights, San Francisco", city: "San Francisco", type: "Estate", beds: 7, baths: 8, sqft: "9,800", badge: "Exclusive", agent: "Marion Reyes",
+    hero: "1568605114967-8130f3a36994", gallery: [INT.open, INT.living, INT.kitchen, INT.bedroom],
+    blurb: "Three levels above the Bay with a walled garden, a nineteen-seat dining room, and a garage for six. Held by one family since 1974." },
+  { id: 4, price: 3180000, title: "Ocean Drive Penthouse", location: "South Beach, Miami", city: "Miami", type: "Penthouse", beds: 3, baths: 4, sqft: "2,850", badge: "New", agent: "Sarah Chen",
+    hero: "1613490493576-7fde63acd811", gallery: [INT.living, INT.kitchen, INT.bedroom, INT.glassWall],
+    blurb: "Corner penthouse with a wrap terrace facing the Atlantic. Deeded beach access, a private lift lobby, and shutters that fold the whole east wall away." },
+  { id: 5, price: 6700000, title: "Laurel Canyon Residence", location: "Hollywood Hills, Los Angeles", city: "Los Angeles", type: "House", beds: 4, baths: 5, sqft: "5,200", badge: "Reduced", agent: "Priya Raval",
+    hero: "1600566753190-17f0baa2a6c3", gallery: [INT.kitchenDark, INT.living2, INT.stairs, INT.bedroom2],
+    blurb: "Cedar and board-formed concrete stepping down a canyon lot, with a studio building at the base and eucalyptus on three sides." },
+  { id: 6, price: 2450000, title: "Greenwich Mews House", location: "West Village, New York", city: "New York", type: "House", beds: 2, baths: 3, sqft: "1,950", badge: "Off-market", agent: "Daniel Okoye",
+    hero: "1523217582562-09d0def993a6", gallery: [INT.loft, INT.open, INT.kitchen, INT.bedroom],
+    blurb: "A restored carriage house on a gated mews, with a double-height studio at the rear and a courtyard planted by a studio out of Rotterdam." },
+  { id: 7, price: 15900000, title: "Star Island Compound", location: "Star Island, Miami", city: "Miami", type: "Estate", beds: 8, baths: 10, sqft: "14,200", badge: "Exclusive", agent: "Sarah Chen",
+    hero: "1600596542815-ffad4c1539a9", gallery: [INT.open, INT.living, INT.glassWall, INT.bedroom],
+    blurb: "Two hundred feet of bay frontage, a guest house, and a dock for a ninety-foot vessel. Rebuilt to the studs in 2020." },
+  { id: 8, price: 5400000, title: "Russian Hill Aerie", location: "Russian Hill, San Francisco", city: "San Francisco", type: "Penthouse", beds: 3, baths: 3, sqft: "2,700", badge: "New", agent: "Marion Reyes",
+    hero: "1600047509807-ba8f99d2cdde", gallery: [INT.living2, INT.stairs, INT.kitchen, INT.bedroom2],
+    blurb: "The top two floors of a 1928 tower, with a roof terrace over the Golden Gate and the original brass lift restored to service." },
+  { id: 9, price: 1980000, title: "Coral Gables Villa", location: "Coral Gables, Miami", city: "Miami", type: "House", beds: 4, baths: 3, sqft: "3,400", badge: "Reduced", agent: "Sarah Chen",
+    hero: "1583608205776-bfd35f0d9f83", gallery: [INT.living, INT.open, INT.kitchen, INT.bedroom],
+    blurb: "A 1936 Mediterranean revival under live oaks, sympathetically extended with a glazed rear pavilion facing the pool." }
+];
+
+const HOODS = [
+  { name: "Tribeca", city: "New York", stat: "Median $3.9M · +6% YoY", listings: 18, img: U("1486406146926-c627a92ad1ab", 700, 940) },
+  { name: "South Beach", city: "Miami", stat: "Median $2.4M · +11% YoY", listings: 26, img: U("1512917774080-9991f1c4c750", 700, 940) },
+  { name: "Hollywood Hills", city: "Los Angeles", stat: "Median $5.1M · +3% YoY", listings: 21, img: U("1531971589569-0d9370cbe1e5", 700, 940) },
+  { name: "Pacific Heights", city: "San Francisco", stat: "Median $7.6M · −2% YoY", listings: 12, img: U("1487958449943-2429e8be8625", 700, 940) }
+];
+
+const AGENTS = [
+  { name: "Sarah Chen", role: "Senior agent · Miami", spec: "Waterfront", sales: "$210M sold", img: AGENT_IMG["Sarah Chen"] },
+  { name: "Daniel Okoye", role: "Partner · New York", spec: "Lofts & conversions", sales: "$340M sold", img: AGENT_IMG["Daniel Okoye"] },
+  { name: "Marion Reyes", role: "Director · San Francisco", spec: "Estates", sales: "$480M sold", img: AGENT_IMG["Marion Reyes"] },
+  { name: "Priya Raval", role: "Agent · Los Angeles", spec: "Architectural", sales: "$155M sold", img: AGENT_IMG["Priya Raval"] }
+];
+
+const QUOTES = [
+  { text: "They showed us four houses instead of forty. The second one is where we live now.", name: "Elena Duval", meta: "Bought in Tribeca, 2025", img: U("1573497019940-1c28c88b4f3e", 200, 200) + "&crop=faces" },
+  { text: "The valuation came back within the hour and it was within two percent of what we closed at.", name: "Jonathan Miller", meta: "Sold in Coral Gables, 2024", img: U("1519085360753-af0119f7cbe7", 200, 200) + "&crop=faces" },
+  { text: "Nothing about it felt like a listings portal. It felt like someone had already read our brief.", name: "Aiko Tanaka", meta: "Bought in Russian Hill, 2026", img: U("1534528741775-53994a69daeb", 200, 200) + "&crop=faces" }
+];
+
+const STEPS = [
+  { n: "01", title: "Tell us the address", body: "We pull comparable sales, tax history and days-on-market for your block." },
+  { n: "02", title: "Walk it with an agent", body: "Sixty minutes on site. You leave with a price band, a staging plan and a timeline." },
+  { n: "03", title: "Go to market — or don't", body: "No listing agreement until you have seen both numbers. A third of our sellers go off-market." }
+];
+
+const SLIDE_LABELS = ["Exterior", "Reception", "Kitchen", "Primary suite", "Living"];
+
+const MARQUEE_BASE = [
+  { name: "Tribeca, NY", stat: "$3.9M median" },
+  { name: "South Beach, MIA", stat: "$2.4M median" },
+  { name: "Hollywood Hills, LA", stat: "$5.1M median" },
+  { name: "Pacific Heights, SF", stat: "$7.6M median" },
+  { name: "West Village, NY", stat: "$4.4M median" },
+  { name: "Coral Gables, MIA", stat: "$1.9M median" },
+  { name: "Russian Hill, SF", stat: "$3.2M median" },
+  { name: "Malibu, LA", stat: "$8.6M median" }
+];
+const MARQUEE = MARQUEE_BASE.concat(MARQUEE_BASE);
+
+class Component extends DCLogic {
+  state = {
+    city: "All", type: "All", beds: 0, maxPrice: 30,
+    activeId: null, slide: 0, contactOpen: false, quoteIdx: 0,
+    vAddress: "", vEmail: "", vTimeline: "Exploring", vErrors: {}, vSent: false,
+    cName: "", cEmail: "", cNote: "", cErrors: {}, cSent: false
+  };
+
+  componentDidMount() {
+    if (this.props.motion === false) {
+      document.querySelectorAll("[data-count]").forEach((n) => { n.removeAttribute("data-count"); });
+      return;
+    }
+    const nodes = document.querySelectorAll("[data-reveal]");
+    nodes.forEach((n, i) => {
+      n.style.opacity = "0";
+      n.style.transform = "translateY(20px)";
+      const d = (i % 4) * 70;
+      n.style.transition = "opacity .7s cubic-bezier(.2,.7,.2,1) " + d + "ms, transform .7s cubic-bezier(.2,.7,.2,1) " + d + "ms";
+    });
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = "1";
+          e.target.style.transform = "translateY(0)";
+          this.io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -6% 0px", threshold: 0.06 });
+    nodes.forEach((n) => this.io.observe(n));
+
+    // count-up: fires once, when each figure scrolls into view
+    const counters = document.querySelectorAll("[data-count]");
+    counters.forEach((n) => {
+      const target = parseFloat(n.getAttribute("data-count"));
+      const dec = parseInt(n.getAttribute("data-dec") || "0", 10);
+      const pre = n.getAttribute("data-prefix") || "";
+      const suf = n.getAttribute("data-suffix") || "";
+      const fmt = (v) => pre + (dec ? v.toFixed(dec) : Math.round(v).toLocaleString()) + suf;
+      n.textContent = fmt(0);
+      n._run = () => {
+        const dur = 1400, t0 = performance.now();
+        const tick = (t) => {
+          const k = Math.min(1, (t - t0) / dur);
+          const e = 1 - Math.pow(1 - k, 3);
+          n.textContent = fmt(target * e);
+          if (k < 1) requestAnimationFrame(tick);
+          else n.textContent = fmt(target);
+        };
+        requestAnimationFrame(tick);
+      };
+    });
+    this.cio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && e.target._run) {
+          e.target._run();
+          e.target._run = null;
+          this.cio.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach((n) => this.cio.observe(n));
+
+    this.onKey = (ev) => {
+      if (ev.key === "Escape") this.setState({ activeId: null, contactOpen: false });
+      if (this.state.activeId && ev.key === "ArrowRight") this.setState((s) => ({ slide: (s.slide + 1) % 5 }));
+      if (this.state.activeId && ev.key === "ArrowLeft") this.setState((s) => ({ slide: (s.slide + 4) % 5 }));
+    };
+    window.addEventListener("keydown", this.onKey);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const open = !!this.state.activeId;
+    if (open !== !!prevState.activeId || prevProps.galleryAutoplay !== this.props.galleryAutoplay) {
+      clearInterval(this._auto);
+      if (open && this.props.galleryAutoplay) {
+        this._auto = setInterval(() => this.setState((s) => ({ slide: (s.slide + 1) % 5 })), 3200);
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._auto);
+    if (this.io) this.io.disconnect();
+    if (this.cio) this.cio.disconnect();
+    window.removeEventListener("keydown", this.onKey);
+  }
+
+  money(n) {
+    if (n >= 1000000) {
+      const m = n / 1000000;
+      return "$" + (m % 1 === 0 ? m.toFixed(0) : m.toFixed(2).replace(/0$/, "")) + "M";
+    }
+    return "$" + n.toLocaleString();
+  }
+
+  filtered() {
+    const s = this.state;
+    return PROPERTIES.filter((p) =>
+      (s.city === "All" || p.city === s.city) &&
+      (s.type === "All" || p.type === s.type) &&
+      (s.beds === 0 || p.beds >= s.beds) &&
+      p.price <= s.maxPrice * 1000000
+    );
+  }
+
+  validEmail(v) { return /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v.trim()); }
+
+  scrollTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: "smooth" });
+    // settle the arriving section in with a soft fade rather than a hard stop
+    el.style.transition = "opacity .5s cubic-bezier(.2,.7,.2,1), transform .5s cubic-bezier(.2,.7,.2,1)";
+    el.style.opacity = "0.35";
+    el.style.transform = "translateY(10px)";
+    clearTimeout(this._settle);
+    this._settle = setTimeout(() => {
+      el.style.opacity = "1";
+      el.style.transform = "translateY(0)";
+    }, 260);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const list = this.filtered();
+    const active = PROPERTIES.find((p) => p.id === s.activeId) || PROPERTIES[0];
+    const frames = [active.hero].concat(active.gallery);
+    const idx = s.slide % frames.length;
+    const q = QUOTES[s.quoteIdx];
+
+    return {
+      city: s.city, type: s.type, maxPrice: s.maxPrice,
+      priceLabel: this.money(s.maxPrice * 1000000),
+      setCity: (e) => this.setState({ city: e.target.value }),
+      setType: (e) => this.setState({ type: e.target.value }),
+      setPrice: (e) => this.setState({ maxPrice: Number(e.target.value) }),
+      bedOptions: [0, 2, 3, 4].map((n) => ({
+        label: n === 0 ? "Any" : n + "+",
+        pick: () => this.setState({ beds: n }),
+        bg: s.beds === n ? "#16171a" : "#f8f7f5",
+        fg: s.beds === n ? "#ffffff" : "#16171a",
+        border: s.beds === n ? "#16171a" : "#dedcd8"
+      })),
+      resultsLabel: "Show " + list.length,
+      resultsSummary: list.length + " of " + PROPERTIES.length + " residences",
+      isEmpty: list.length === 0,
+      resetFilters: () => this.setState({ city: "All", type: "All", beds: 0, maxPrice: 30 }),
+      navClick: (e) => {
+        const href = e.currentTarget.getAttribute("href") || "";
+        if (href.length > 1 && href.charAt(0) === "#") {
+          e.preventDefault();
+          if (href === "#top") window.scrollTo({ top: 0, behavior: "smooth" });
+          else this.scrollTo(href.slice(1));
+        }
+      },
+      scrollToResults: () => this.scrollTo("properties"),
+      scrollToSell: () => this.scrollTo("sell"),
+
+      visible: list.map((p) => ({
+        ...p,
+        img: U(p.hero, 900, 680),
+        price: this.money(p.price),
+        open: () => this.setState({ activeId: p.id, slide: 0 })
+      })),
+
+      hoods: HOODS,
+      agents: AGENTS,
+      steps: STEPS,
+
+      quote: { ...q, index: (s.quoteIdx + 1) + " / " + QUOTES.length },
+      nextQuote: () => this.setState((st) => ({ quoteIdx: (st.quoteIdx + 1) % QUOTES.length })),
+      prevQuote: () => this.setState((st) => ({ quoteIdx: (st.quoteIdx + QUOTES.length - 1) % QUOTES.length })),
+
+      showQuotePhoto: (this.props.reviewsMedia ?? "photo") === "photo",
+      showMarquee: (this.props.reviewsMedia ?? "photo") === "marquee",
+      quotePhoto: U("1616486338812-3dadae4b4ace", 700, 880),
+      marquee: MARQUEE,
+
+      modalOpen: !!s.activeId,
+      active: {
+        ...active,
+        price: this.money(active.price),
+        agentImg: AGENT_IMG[active.agent],
+        slideImg: U(frames[idx], 1600, 1000),
+        slideCaption: SLIDE_LABELS[idx],
+        slideCounter: (idx + 1) + " / " + frames.length
+      },
+      closeModal: () => this.setState({ activeId: null }),
+      nextSlide: (e) => { e.stopPropagation(); this.setState((st) => ({ slide: (st.slide + 1) % 5 })); },
+      prevSlide: (e) => { e.stopPropagation(); this.setState((st) => ({ slide: (st.slide + 4) % 5 })); },
+      stop: (e) => e.stopPropagation(),
+
+      f: {
+        address: s.vAddress, email: s.vEmail, timeline: s.vTimeline,
+        addressError: s.vErrors.address || "", emailError: s.vErrors.email || "",
+        addressBorder: s.vErrors.address ? "#b4342a" : "#dedcd8",
+        emailBorder: s.vErrors.email ? "#b4342a" : "#dedcd8",
+        sent: s.vSent, cta: s.vSent ? "Estimate sent" : "Get my estimate"
+      },
+      onAddress: (e) => this.setState({ vAddress: e.target.value, vErrors: { ...this.state.vErrors, address: "" } }),
+      onEmail: (e) => this.setState({ vEmail: e.target.value, vErrors: { ...this.state.vErrors, email: "" } }),
+      onTimeline: (e) => this.setState({ vTimeline: e.target.value }),
+      submitValuation: () => {
+        const errs = {};
+        if (this.state.vAddress.trim().length < 6) errs.address = "Add the street and city so we can pull comparables.";
+        if (!this.validEmail(this.state.vEmail)) errs.email = "Check the email address.";
+        this.setState({ vErrors: errs, vSent: Object.keys(errs).length === 0 });
+      },
+
+      c: {
+        name: s.cName, email: s.cEmail, note: s.cNote,
+        nameError: s.cErrors.name || "", emailError: s.cErrors.email || "",
+        nameBorder: s.cErrors.name ? "#b4342a" : "#dedcd8",
+        emailBorder: s.cErrors.email ? "#b4342a" : "#dedcd8",
+        sent: s.cSent, cta: s.cSent ? "Sent" : "Send to an agent"
+      },
+      contactOpen: s.contactOpen,
+      openContact: () => this.setState({ contactOpen: true, cSent: false }),
+      closeContact: () => this.setState({ contactOpen: false }),
+      onCName: (e) => this.setState({ cName: e.target.value, cErrors: { ...this.state.cErrors, name: "" } }),
+      onCEmail: (e) => this.setState({ cEmail: e.target.value, cErrors: { ...this.state.cErrors, email: "" } }),
+      onCNote: (e) => this.setState({ cNote: e.target.value }),
+      submitContact: () => {
+        const errs = {};
+        if (this.state.cName.trim().length < 2) errs.name = "Tell us who you are.";
+        if (!this.validEmail(this.state.cEmail)) errs.email = "Check the email address.";
+        this.setState({ cErrors: errs, cSent: Object.keys(errs).length === 0 });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
